@@ -1,0 +1,50 @@
+// Given two strings s and t return whether or not s is an anagram of t.
+// Note: An anagram is a word formed by reordering the letters of another word.
+
+// Ex: Given the following strings...
+
+// s = "cat", t = "tac", return true
+// s = "listen", t = "silent", return true
+// s = "program", t = "function", return false
+
+
+import java.io.*;
+import java.util.*;
+import java.lang.*;
+
+class Anagrams{
+    
+    public static boolean fun(String s1,String s2)
+    {
+        if(s1.length()!=s2.length())
+            return false;
+        
+        int [] a=new int[26];
+        int [] b=new int[26];
+        for(int i=0;i<s1.length();i++){
+            
+            a[s1.charAt(i)-'a']++;
+        }
+
+        for(int i=0;i<s2.length();i++){
+            b[s2.charAt(i)-'a']++;
+        }
+        
+        for(int i=0;i<26;i++)
+        {
+            if(a[i]!=b[i])
+                return false;
+        }
+        return true;
+    }
+	public static void main (String[] args) {
+	   Scanner sc=new Scanner(System.in);
+		String s1=sc.next();
+		String s2=sc.next();
+		if(fun(s1,s2))
+		    System.out.println("yes");
+		 
+		 else
+		    System.out.println("No");
+	}
+}
