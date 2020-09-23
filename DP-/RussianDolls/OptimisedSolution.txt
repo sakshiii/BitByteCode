@@ -1,0 +1,31 @@
+class OptimisedSolution {
+    
+    public int maxEnvelopes(int[][] envelopes) {
+        Arrays.sort(envelopes, new Comparator<int[]>(){
+            public int compare(int[] a, int[] b) {
+                return a[0]==b[0] ? b[1]-a[1] : a[0]-b[0]; 
+            }
+        });
+        
+        int max = 0;
+        int[] lis = new int[envelopes.length];
+        for(int i=0;i<envelopes.length;i++){
+            lis[i] = Integer.MAX_VALUE;
+            int j = envelopes[i][1];
+            int left = 0;
+            int right = i;
+            while(left<right) {
+                int mid = (left+right)/2;
+                if(lis[mid] >= j)
+                    right = mid;
+                else
+                    left = mid+1;
+            }
+            int pos = left;
+            lis[pos] = j;
+            if(max<pos+1)
+                max = pos+1;
+        }
+        return max;
+    }
+}
