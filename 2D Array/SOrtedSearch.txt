@@ -1,3 +1,6 @@
+
+//Sorted 2D array/ArrayList  is given and you have to find the target element
+
 public class Solution {
 	public int searchMatrix(ArrayList<ArrayList<Integer>> a, int b) {
 	    if(a == null || a.size() == 0 || a.get(0).size() == 0) {
