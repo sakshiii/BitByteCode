@@ -1,0 +1,24 @@
+/**
+ * Definition for singly-linked list.
+ * class ListNode {
+ *     public int val;
+ *     public ListNode next;
+ *     ListNode(int x) { val = x; next = null; }
+ * }
+ * Given 1->2->3->4, you should return the list as 2->1->4->3.
+ */
+public class Solution {
+    public ListNode swapPairs(ListNode A) {
+
+    if(A==null || A.next==null) return A;
+        ListNode cur =A;
+        while(cur!=null && cur.next!=null)
+        {
+            int t=cur.val;
+            cur.val=cur.next.val;
+            cur.next.val=t;
+            cur=cur.next.next;
+        }
+        return A;
+    }
+}
