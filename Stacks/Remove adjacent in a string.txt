@@ -1,0 +1,30 @@
+import java.io.*;
+import java.util.*;
+import java.lang.*;
+
+class GFG {
+    
+	public static void main (String[] args) {
+	 
+	    Scanner sc=new Scanner (System.in);
+        String str=sc.next();
+        Stack<Character> st=new Stack<>();
+        int i=0;
+        while(i<str.length())
+        {
+            if(!st.isEmpty() && str.charAt(i)==st.peek() )
+            {
+                st.pop();    
+            }
+            else
+            st.push(str.charAt(i));
+            i++;
+        }
+        StringBuilder s=new StringBuilder();
+        System.out.println(st.size() );
+        int n=st.size();
+        for(int j=0;j<n;j++)
+            s.append(st.pop());
+        System.out.println(s.reverse() );
+	}
+}
