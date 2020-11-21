@@ -1,0 +1,44 @@
+/**
+ * Definition of TreeNode:
+ * public class TreeNode {
+ *     public int val;
+ *     public TreeNode left, right;
+ *     public TreeNode(int val) {
+ *         this.val = val;
+ *         this.left = this.right = null;
+ *     }
+ * }
+ */
+
+public class Solution {
+    /**
+     * @param root: a root of binary tree
+     * @return: return a integer
+     */
+     public int height (TreeNode node)
+     {
+         if(node==null) return -1;
+         
+         return Math.max(height(node.left)+1,height(node.right)+1);
+     }
+     int d=0;
+     public int diameterOfBinaryTreeUtil(TreeNode root) 
+     {
+         if(root==null) return 0;
+         
+            int la=height(root.left);
+            int ra=height(root.right);
+            
+            return Math.max(la+ra+2,Math.max(diameterOfBinaryTreeUtil(root.left),diameterOfBinaryTreeUtil(root.right)));
+            
+            
+     }
+     
+    public int diameterOfBinaryTree(TreeNode root) {
+        // write your code here
+        int d=diameterOfBinaryTreeUtil(root);
+        
+        return d;
+        
+    }
+}
