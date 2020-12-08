@@ -1,0 +1,38 @@
+class Solution {
+    public int maxOperations(int[] nums, int k) {
+     
+        Map<Integer,Integer> hm=new HashMap<>();
+        for(int i=0;i<nums.length;i++)
+        {
+            hm.put(nums[i],hm.getOrDefault(nums[i],0)+1);
+        }
+        int c=0;
+        //System.out.println(hm.get(3));
+        for(Map.Entry<Integer,Integer> m :hm.entrySet())
+        {
+            
+            while(m.getKey()!=k-m.getKey() && hm.containsKey(k-m.getKey()) && (hm.get(k-m.getKey())>=1&&hm.get(m.getKey())>=1 ))
+            {
+                System.out.println(m.getKey()+"hrynm   "+m.getValue());
+                c++;
+                int x=m.getKey();
+                hm.put(x,hm.get(x)-1);
+                hm.put(k-x,hm.get(k-x)-1);                
+            }
+            while( m.getKey()==k-m.getKey() && hm.get(m.getKey())>=2 )   
+            {
+                
+                c++;
+                int x=m.getKey();
+                hm.put(x,hm.get(x)-2);
+                //hm.put(k-x,hm.get(k-x)-1);
+                //hm.remove(x);
+            }
+            if(k==0 )
+            {
+                if(hm.get(k)>=2) c++;
+            }
+        }
+        return c;
+    }
+}
