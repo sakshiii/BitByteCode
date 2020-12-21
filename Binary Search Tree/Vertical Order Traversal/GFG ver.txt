@@ -1,0 +1,59 @@
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+class Solution {
+    class Pair{
+        TreeNode node;
+        int hd;
+        Pair(TreeNode n,int h)
+        {
+            node=n;
+            hd=h;
+        }
+    }
+    
+    
+    public List<List<Integer>> verticalTraversal(TreeNode root) {
+        TreeMap<Integer,List<Integer>> tm=new TreeMap<>();
+        //helper(tm,0,root);    
+        List<List<Integer>> res=new ArrayList<>();
+        
+        Queue<Pair> q=new LinkedList<>();
+        q.add(new Pair(root,0));
+        while(!q.isEmpty()){
+            Pair p=q.remove();
+            int hd=p.hd;
+            TreeNode node=p.node;
+            
+            if(tm.containsKey(hd))
+                tm.get(hd).add(node.val);
+            else
+            {
+                List<Integer> cur=new ArrayList<>();
+                cur.add(node.val);
+                tm.put(hd,cur);
+            }
+           // System.out.println(tm.get(hd));
+            if(node.left!=null) q.add(new Pair(node.left,hd-1));
+            
+            if(node.right!=null) q.add(new Pair(node.right,hd+1));
+        }
+        for(Map.Entry<Integer, List<Integer>> thm: tm.entrySet())
+        {
+            res.add(thm.getValue());
+        }
+    return res;
+    }
+}
