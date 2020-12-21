@@ -1,0 +1,31 @@
+// without duplicates
+//You can also avoid using the hashset
+class Solution {
+    public List<List<Integer>> combinationSum2(int[] A, int B) {
+        List<List<Integer>> ans=new ArrayList<>();   
+        Arrays.sort(A);
+        HashSet<List<Integer>> res=new HashSet<>();
+        findComb(res,new ArrayList<>(),0, A , B);
+        for(List<Integer> li: res)
+            ans.add(li);
+        
+        return ans;
+    }
+    static void findComb(HashSet<List<Integer>> res,ArrayList<Integer>       cur,int idx,int[] arr,int tar)
+    {
+        if(tar==0)
+        {
+            res.add(new ArrayList(cur));
+            return;
+        }
+        if(tar<0) return;
+        
+        for(int i=idx;i<arr.length;i++)
+        {
+            if(i>idx && arr[i]==arr[i-1]) continue;
+            cur.add(arr[i]);
+            findComb(res,cur,i+1,arr,tar-arr[i]);
+            cur.remove(cur.size()-1);
+            
+        }
+    }}
