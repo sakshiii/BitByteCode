@@ -1,0 +1,29 @@
+class Solution {
+    public List<List<Integer>> permuteUnique(int[] nums) {
+        List<List<Integer>> res=new ArrayList<>();
+        Arrays.sort(nums);
+        boolean[] vis=new boolean[nums.length];
+        perhelper(res,new ArrayList<>(),nums,vis);
+        
+        return res;
+    }
+    public void perhelper(List<List<Integer>> res,List<Integer> cur,int[] arr,boolean [] vis)
+    {
+        
+        if(cur.size()==arr.length)
+        {
+            res.add(new ArrayList(cur));
+            return;
+        }
+        for(int i=0;i<arr.length;i++)
+        {
+//!vis[i-1] to nsure same permutation doesnt occur twice
+            if(vis[i]==true || i>0 && arr[i]==arr[i-1] && !vis[i-1]) continue;
+            cur.add(arr[i]);
+            vis[i]=true;
+            perhelper(res,cur,arr,vis);
+            cur.remove(cur.size()-1);
+            vis[i]=false;
+        }
+    }
+}
